@@ -23,7 +23,7 @@ public interface AddressRepository extends JpaRepository<Address,Long> {
     public List<Address> findByStateProvince3(@Param("stateprovince") String stateProvince);
 
 
-    @Query("select a from address a where country = :country")
+    @Query("select a from Address a where a.country = :country")
     public List<Address> getAddressByCountry(@Param("country") String country);
 
     @Query(value = "select * from address", nativeQuery = true)
