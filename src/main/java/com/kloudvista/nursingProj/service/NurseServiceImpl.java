@@ -22,7 +22,6 @@ public class NurseServiceImpl implements NurseService{
     @Override
     public NurseResp saveNurse(NurseReq req) {
         Nurse nurse = new Nurse();
-        nurse.setAddress(req.getAddress());
         nurse.setFirstName(req.getFirstName());
         nurse.setEmail(req.getEmail());
         nurse.setPhoneNumber(req.getPhoneNumber());
@@ -62,7 +61,6 @@ public class NurseServiceImpl implements NurseService{
     public NurseResp updateNurse(NurseReq nurseReq, long id) {
         Nurse nurse = new Nurse();
         try {
-            nurse.setAddress(nurseReq.getAddress());
             nurse.setFirstName(nurseReq.getFirstName());
             nurse.setEmail(nurseReq.getEmail());
             nurse.setPhoneNumber(nurseReq.getPhoneNumber());

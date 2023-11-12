@@ -1,12 +1,19 @@
 package com.kloudvista.nursingProj.controller;
 
+import com.kloudvista.nursingProj.domain.Address;
+import com.kloudvista.nursingProj.domain.Nurse;
 import com.kloudvista.nursingProj.dto.NurseReq;
 import com.kloudvista.nursingProj.dto.NurseResp;
+import com.kloudvista.nursingProj.repository.AddressRepository;
+import com.kloudvista.nursingProj.repository.NurseRepository;
 import com.kloudvista.nursingProj.service.NurseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/nurse")
@@ -18,6 +25,7 @@ private NurseServiceImpl nurseServiceImpl;
    // CRUD
     // @RequestBody - post
     //
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity<NurseResp> saveNurse(@RequestBody NurseReq nurseReq){
         NurseResp nurseResp = nurseServiceImpl.saveNurse(nurseReq);
@@ -47,4 +55,5 @@ private NurseServiceImpl nurseServiceImpl;
         NurseResp nurseResp = nurseServiceImpl.deleteNurse(id);
         return  new ResponseEntity<>(nurseResp, HttpStatus.OK);
     }
+
 }
