@@ -11,6 +11,7 @@ public interface AddressRepository extends JpaRepository<Address,Long> {
     public List<Address> findByStateProvince(String stateProvince);
 
     //nativeQuery
+    // LET ME KNOW WHEN YOU ARE READY
     @Query(value = "select * from  nurse_address where state_province = ?1", nativeQuery = true)
      List<Address> findByStateProvince2(String stateProvince);
 
