@@ -4,10 +4,12 @@ import com.kloudvista.nursingProj.enums.AddressType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "address")
+@Table(name = " nurses_address")
 @ToString
 @Entity
 @Builder
@@ -20,6 +22,9 @@ public class Address {
     private String city;
     private String stateProvince;
     private String country;
+    private String registrationNo;
+    @Enumerated(EnumType.STRING)
     private AddressType addressType;
+
 
 }

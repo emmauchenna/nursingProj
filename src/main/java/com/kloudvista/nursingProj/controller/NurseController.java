@@ -32,6 +32,12 @@ private NurseServiceImpl nurseServiceImpl;
         return  new ResponseEntity<>(nurseResp, HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = "/saveNurses", method = RequestMethod.POST)
+    public ResponseEntity<NurseResp> saveNurses(@RequestBody List<NurseReq> nurseReq){
+        NurseResp nurseResp = nurseServiceImpl.saveNurses(nurseReq);
+        return  new ResponseEntity<>(nurseResp, HttpStatus.CREATED);
+    }
+
     @RequestMapping(value = "/get-all", method = RequestMethod.GET)
     public ResponseEntity<NurseResp> getNurses(){
         NurseResp nurseResp = nurseServiceImpl.getNurses();

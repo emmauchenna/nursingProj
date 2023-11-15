@@ -1,12 +1,15 @@
 package com.kloudvista.nursingProj.service;
 
+import com.kloudvista.nursingProj.domain.BioDetail;
 import com.kloudvista.nursingProj.domain.Nurse;
+import com.kloudvista.nursingProj.dto.Biodata;
 import com.kloudvista.nursingProj.dto.NurseReq;
 import com.kloudvista.nursingProj.dto.NurseResp;
 import com.kloudvista.nursingProj.repository.NurseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +33,26 @@ public class NurseServiceImpl implements NurseService{
 
         Nurse save = repository.save(nurse);
         return new NurseResp("Saved successfully", save);
+    }
+
+    @Override
+    public NurseResp saveNurses(List<NurseReq> req) {
+        List<Nurse> nurseList = new ArrayList<>();
+        req.forEach(n -> {
+            Nurse nurse = new Nurse();
+            nurse.setFirstName(n.getFirstName());
+            nurse.setEmail(n.getEmail());
+            nurse.setPhoneNumber(n.getPhoneNumber());
+            nurse.setLastName(n.getLastName());
+            nurse.setStatus(true);
+           // nurse.setBioDetails(new BioDetail(0, n.getBiodata().getDateOfBirth(), n.getBiodata().getHeight(),  n.getBiodata().getWeight()));
+            nurse.setBioDetail(bioDataToBioDetail(n.getBiodata()));
+            nurseList.add(nurse);
+        });
+
+
+        List<Nurse> saved = repository.saveAll(nurseList);
+        return new NurseResp("Saved successfully", saved);
     }
 
     @Override
@@ -77,6 +100,14 @@ public class NurseServiceImpl implements NurseService{
     public NurseResp getByEmail(String emailAddress) {
         Nurse byEmail = repository.findByEmail(emailAddress);
         return new NurseResp("successful", byEmail);
+    }
+
+    private BioDetail bioDataToBioDetail(Biodata biodata){
+        BioDetail bioDetail = new BioDetail();
+        bioDetail.setDateOfBirth(biodata.getDateOfBirth()) ;
+        bioDetail.setHeight(biodata.getHeight());
+        bioDetail.setWeight(biodata.getWeight());
+        return bioDetail;
     }
 
 }

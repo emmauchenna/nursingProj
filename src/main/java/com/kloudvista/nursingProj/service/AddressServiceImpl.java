@@ -4,6 +4,7 @@ import com.kloudvista.nursingProj.domain.Address;
 import com.kloudvista.nursingProj.dto.AddressDto;
 import com.kloudvista.nursingProj.enums.AddressType;
 import com.kloudvista.nursingProj.repository.AddressRepository;
+import org.hibernate.id.GUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,13 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public void saveAddress(AddressDto addressDto) {
+        // Nurse registration no
+        //
+        //
+        String registation = "9399393";
 
         Address address = new Address(0, addressDto.getStreet(), addressDto.getStreet_2(), addressDto.getCity(),
-                addressDto.getStateProvince(), addressDto.getCountry(), AddressType.valueOf("HOME"));
+                addressDto.getStateProvince(), addressDto.getCountry(), registation , AddressType.valueOf("HOME"));
         address.setStreet(addressDto.getStreet());
 
         addressRepository.save(address);
@@ -34,6 +39,8 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public List<Address> getByCountry(String country) {
+        //
+        //
         return addressRepository.getAddressByCountry(country);
     }
 
